@@ -12,7 +12,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.lijo.cloverboard.Fragments.InboxFragment;
+
+import com.example.lijo.cloverboard.Fragments.BedroomFragment;
 import com.example.lijo.cloverboard.Fragments.StarredFragment;
 
 
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity  {
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
 
                         switch (menuItem.getItemId()) {
-                            case R.id.item_navigation_drawer_inbox:
+                            case R.id.item_navigation_bedroom:
                                 menuItem.setChecked(true);
                                 setFragment(0);
                                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity  {
 
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-                            case R.id.item_navigation_drawer_sent_mail:
+                            case R.id.item_navigation_living_room:
                                 menuItem.setChecked(true);
 
                                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -120,8 +121,8 @@ public class MainActivity extends AppCompatActivity  {
             case 0:
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                InboxFragment inboxFragment = new InboxFragment();
-                fragmentTransaction.replace(R.id.fragment, inboxFragment);
+                BedroomFragment bedroomFragment = new BedroomFragment();
+                fragmentTransaction.replace(R.id.fragment, bedroomFragment);
                 fragmentTransaction.commit();
                 break;
             case 1:
