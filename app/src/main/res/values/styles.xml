@@ -9,7 +9,8 @@
         <item name="colorPrimary">@color/md_red_500</item>
         <item name="colorPrimaryDark">@color/md_red_700</item>
         <item name="colorAccent">@color/md_pink_500</item>
-        <item name="colorControlHighlight">@color/md_red_500_25</item>
+
+        <item name="colorControlHighlight">@color/md_grey_500_25</item>
         <item name="android:windowBackground">@color/md_white_1000</item>
     </style>
 
