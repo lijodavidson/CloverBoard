@@ -24,7 +24,7 @@ TextView textview1=(TextView) findViewById(R.id.link_signup);
 
             @Override
         public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Signup.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
                 //Intent intent=new Intent();
              //   intent.setClass(this,Signup.class);
