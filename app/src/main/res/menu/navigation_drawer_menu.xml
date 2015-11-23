@@ -1,36 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group android:checkableBehavior="single">
         <item
             android:checked="true"
             android:id="@+id/item_navigation_drawer_inbox"
-            android:icon="@drawable/ic_inbox_black_24dp"
-            android:title="Inbox" />
+            android:icon="@drawable/bedroom_nav_icon"
+            android:title="Bedroom" />
         <item
             android:id="@+id/item_navigation_drawer_starred"
-            android:icon="@drawable/ic_action_toggle_star"
-            android:title="Starred" />
-        <itemheader.jpg
+            android:icon="@drawable/kitchen_nav_icon"
+            android:title="Kitchen" />
+        <item
             android:id="@+id/item_navigation_drawer_sent_mail"
-            android:icon="@drawable/ic_action_content_send"
-            android:title="Sent mail" />
+            android:icon="@drawable/livingroom_nav_icon"
+            android:title="Livingroom" />
         <item
             android:id="@+id/item_navigation_drawer_drafts"
-            android:icon="@drawable/ic_action_content_drafts"
-            android:title="Drafts" />
+            android:icon="@drawable/addnew_nav_icon"
+            android:title="Add New" />
+
+
     </group>
 
-    <item android:title="Subheader">ic_action_action_delete.png
+
+    <item android:title="Customize">
         <menu>
-            <itemic_action_action_help.png
+            <item
                 android:id="@+id/item_navigation_drawer_settings"
-                android:icon="@drawable/ic_action_content_mail"
-                android:title="Settings" />
+                android:icon="@drawable/theme_nav_icon"
+                android:title="Theme" />
+
+
+
             <item
                 android:id="@+id/item_navigation_drawer_help_and_feedback"
-                android:icon="@drawable/ic_action_action_delete"
-                android:title="Help and feedback" />
+                android:icon="@drawable/settings_nav_icon"
+                android:title="Settings" />
+
+
+            <item
+                android:id="@+id/item_navigation_drawer_logout"
+                android:icon="@drawable/exit_nav_icon"
+                android:title="Logout" />
+
         </menu>
     </item>
 

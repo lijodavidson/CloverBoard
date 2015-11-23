@@ -24,21 +24,9 @@ public class StarredFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_starred, container, false);
 
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle("starred");
+        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Kitchen");
 
-        Button buttonChangeText = (Button) view.findViewById(R.id.buttonFragmentStarred);
 
-        final TextView textViewstarredFragment = (TextView) view.findViewById(R.id.textViewStFragment);
-
-        buttonChangeText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                textViewstarredFragment.setText("This is the starred Fragment");
-                textViewstarredFragment.setTextColor(getResources().getColor(R.color.md_yellow_800));
-
-            }
-        });
 
         return view;
     }
