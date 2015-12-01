@@ -45,6 +45,7 @@ public class MainActivity extends AppCompatActivity  {
 
         setupNavigationDrawerContent(navigationView);
         //displays first in nav view
+
         setFragment(0);
 
     }
