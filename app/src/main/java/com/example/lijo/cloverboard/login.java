@@ -9,16 +9,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import butterknife.InjectView;
+import com.firebase.client.Firebase;
+
+
 
 public class login extends AppCompatActivity{
 
 
-
+private Firebase mref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Firebase.setAndroidContext(this);
+        mref= new Firebase("https://cloverboard.firebaseio.com/login");
 TextView textview1=(TextView) findViewById(R.id.link_signup);
         textview1.setOnClickListener(new View.OnClickListener() {
 
