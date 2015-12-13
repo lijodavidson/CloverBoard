@@ -7,18 +7,19 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/loginback"
-        android:paddingTop="120dp"
+        android:background="@drawable/cbbackred"
+        android:paddingTop="80dp"
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
         android:weightSum="1">
 
 
 
-        <ImageView android:src="@drawable/logo"
-            android:layout_width="202dp"
+        <ImageView android:src="@drawable/cbredlogo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="6dp"
+
             android:layout_gravity="center_horizontal" />
 
 
@@ -35,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:drawableStart="@drawable/user"
-                android:hint="Email"
+                android:hint="@string/login_email"
                  />
 
 
@@ -48,14 +49,16 @@
             android:layout_height="wrap_content"
             android:paddingLeft="22dp"
             android:paddingRight="22dp"
+            style="@style/Base.AppTheme"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp">
             <EditText android:id="@+id/input_password"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:inputType="textPassword"
+                style="@style/Base.AppTheme"
                 android:drawableStart="@drawable/lock5"
-                android:hint="Password"/>
+                android:hint="@string/login_password"/>
         </android.support.design.widget.TextInputLayout>
 
 
@@ -71,17 +74,18 @@
 
             android:layout_marginLeft="24dp"
             android:layout_marginRight="24dp"
-            android:textSize="14sp"
-            android:text="Login" />
+            android:textSize="16sp"
+            android:text="@string/login_button"
+            />
 
     <TextView android:id="@+id/link_signup"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="24dp"
-        android:text="REGISTER"
+        android:text="@string/login_register_text"
         android:gravity="center"
         android:clickable="true"
-        android:textSize="14dip"/>
+        android:textSize="14sp"/>
 
 
 

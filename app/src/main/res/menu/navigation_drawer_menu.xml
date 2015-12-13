@@ -17,7 +17,7 @@
             android:icon="@drawable/livingroom_nav_icon"
             android:title="Livingroom" />
         <item
-            android:id="@+id/item_navigation_drawer_drafts"
+            android:id="@+id/item_navigation_addnew"
             android:icon="@drawable/addnew_nav_icon"
             android:title="Add New" />
 

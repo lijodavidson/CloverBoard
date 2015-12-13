@@ -15,6 +15,9 @@ import com.firebase.client.Firebase;
 
 public class login extends AppCompatActivity{
 
+    private static final String TAG = "LoginActivity";
+
+
 
 private Firebase mref;
     @Override
@@ -22,13 +25,13 @@ private Firebase mref;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         Firebase.setAndroidContext(this);
-        mref= new Firebase("https://cloverboard.firebaseio.com/login");
+        mref= new Firebase("https://cloverboard.firebaseio.com");
 TextView textview1=(TextView) findViewById(R.id.link_signup);
         textview1.setOnClickListener(new View.OnClickListener() {
 
             @Override
         public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), Signup.class);
 
                 //Intent intent=new Intent();
              //   intent.setClass(this,Signup.class);

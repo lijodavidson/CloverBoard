@@ -8,7 +8,7 @@
     <style name="Base.AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/md_red_500</item>
         <item name="colorPrimaryDark">@color/md_red_700</item>
-        <item name="colorAccent">@color/md_pink_500</item>
+        <item name="colorAccent">@color/md_red_500</item>
 
         <item name="colorControlHighlight">@color/md_grey_500_25</item>
         <item name="android:windowBackground">@color/md_white_1000</item>
@@ -22,5 +22,11 @@
     <style name="NavigationViewTheme" parent="AppTheme">
         <item name="textAppearanceListItem">@style/TextAppearance.AppCompat.Body2</item>
     </style>
+
+    <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:textColorPrimary">#5c5c5c</item>
+        <item name="android:background">#fdfdfe</item>
+    </style>
+
 
 </resources>

@@ -3,18 +3,21 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/signupback"
-    android:paddingTop="120dp"
+    android:background="@drawable/cbbackred"
+    android:paddingTop="80dp"
     android:paddingLeft="24dp"
     android:paddingRight="24dp"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:id="@+id/signup">
 
 
-    <ImageView android:src="@drawable/logo"
-        android:layout_width="202dp"
+    <ImageView android:src="@drawable/cbredlogo"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
-        android:layout_gravity="center_horizontal" />
+        android:layout_marginBottom="6dp"
+
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/signupp" />
 
 
     <!-- Name Label -->

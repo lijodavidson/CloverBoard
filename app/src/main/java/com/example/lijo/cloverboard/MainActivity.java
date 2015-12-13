@@ -1,19 +1,26 @@
 package com.example.lijo.cloverboard;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 
 import com.example.lijo.cloverboard.Fragments.BedroomFragment;
+import com.example.lijo.cloverboard.Fragments.LivingFragment;
 import com.example.lijo.cloverboard.Fragments.StarredFragment;
 
 
@@ -22,7 +29,8 @@ public class MainActivity extends AppCompatActivity  {
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBar actionBar;
-
+    final Context context = this;
+    EditText Dialougeedit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,7 @@ public class MainActivity extends AppCompatActivity  {
         //displays first in nav view
 
         setFragment(0);
+
 
     }
 
@@ -85,16 +94,21 @@ public class MainActivity extends AppCompatActivity  {
 
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
+
+
                             case R.id.item_navigation_living_room:
                                 menuItem.setChecked(true);
-
+                                setFragment(2);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-                            case R.id.item_navigation_drawer_drafts:
+
+
+                           /* case R.id.item_navigation_drawer_drafts:
                                 menuItem.setChecked(true);
 
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
+*/
                         /*    case R.id.item_navigation_drawer_settings:
                                 menuItem.setChecked(true);
 
@@ -103,6 +117,32 @@ public class MainActivity extends AppCompatActivity  {
                                 Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
                                 startActivity(intent);
                                 return true;*/
+
+                            case R.id.item_navigation_addnew:
+                                menuItem.setChecked(true);
+
+                                LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
+                                View subView = inflater.inflate(R.layout.dilog_item, null);
+                                final EditText subEditText = (EditText)subView.findViewById(R.id.editdilog);
+
+
+
+
+
+                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this,R.style.AppCompatAlertDialogStyle);
+                                builder.setTitle("Add Room");
+
+                                builder.setMessage("Press the Configuration Button on the CloverBoard ");
+                                builder.setPositiveButton("ADD", null);
+                                builder.setNegativeButton("CANCEL", null);
+                                builder.setView(subView);
+                                builder.show();
+
+
+
+
+
+
                             case R.id.item_navigation_drawer_help_and_feedback:
                                 menuItem.setChecked(true);
                                 Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
@@ -133,6 +173,20 @@ public class MainActivity extends AppCompatActivity  {
                 fragmentTransaction.replace(R.id.fragment, starredFragment);
                 fragmentTransaction.commit();
                 break;
+
+
+            case 2:
+                fragmentManager = getSupportFragmentManager();
+                fragmentTransaction = fragmentManager.beginTransaction();
+               /* StarredFragment starredFragment = new StarredFragment();*/
+                LivingFragment livingFragment=new LivingFragment();
+                fragmentTransaction.replace(R.id.fragment, livingFragment);
+               /* fragmentTransaction.replace(R.id.fragment, starredFragment);*/
+                fragmentTransaction.commit();
+                break;
+
+
+
         }
     }
 
