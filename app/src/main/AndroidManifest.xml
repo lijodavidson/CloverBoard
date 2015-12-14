@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lijo.cloverboard" >
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <supports-screens
         android:largeScreens="true"
         android:normalScreens="true"
@@ -27,12 +29,21 @@
             android:name=".Signup"
             android:label="@string/title_activity_signup"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.reg" >
+            android:theme="@style/AppTheme.Dark" >
         </activity>
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme" >
+        </activity>
+        <activity
+            android:name=".PasswordReset"
+            android:theme="@style/Theme.forget"
+            android:label="@string/title_activity_password_reset"
+            android:parentActivityName=".login" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.lijo.cloverboard.login" />
         </activity>
     </application>
 

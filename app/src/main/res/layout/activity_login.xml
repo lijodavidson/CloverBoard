@@ -85,15 +85,20 @@
         android:text="@string/login_register_text"
         android:gravity="center"
         android:clickable="true"
-        android:textSize="14sp"/>
+        android:textSize="14sp"
+        android:layout_weight="0.17" />
+
+    <TextView android:id="@+id/forgot_link"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:text="Forgot password??"
+        android:gravity="center"
+        android:textSize="14sp"
+        android:layout_weight="0.12" />
 
 
-
-
-
-
-
-    </LinearLayout>
+</LinearLayout>
 
 
 

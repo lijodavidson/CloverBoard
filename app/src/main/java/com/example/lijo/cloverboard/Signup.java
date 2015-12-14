@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.firebase.client.Firebase;
@@ -31,7 +32,7 @@ public class Signup extends AppCompatActivity {
     private EditText signup_password;
     private EditText signup_name;
     private Button signup_button;
-
+private TextView already_login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +43,7 @@ public class Signup extends AppCompatActivity {
         signup_password=(EditText)findViewById(R.id.input_password);
         signup_name=(EditText)findViewById(R.id.input_name);
         signup_button=(Button)findViewById(R.id.btn_signup);
-
+already_login=(TextView)findViewById(R.id.link_login);
 
         signup_button.setOnClickListener(new View.OnClickListener() {
 
@@ -55,6 +56,18 @@ public class Signup extends AppCompatActivity {
             }
 
 
+        });
+
+
+        already_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent z = new Intent(getApplicationContext(), login.class);
+                startActivity(z);
+                finish();
+
+            }
         });
 
 
@@ -72,7 +85,7 @@ public class Signup extends AppCompatActivity {
         Log.d(TAG, "Signup");
 
         if (!validate()) {
-            onSignupFailed();
+            Toast.makeText(getApplicationContext(), "Input proper Credentials ", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -107,10 +120,11 @@ public class Signup extends AppCompatActivity {
         signup_button.setEnabled(true);
 
 
-
-      final   String crt_name=signup_name.getText().toString().trim();
-        final String crt_email=signup_email.getText().toString().trim();
-       final  String crt_password=signup_password.getText().toString().trim();
+        setResult(RESULT_OK, null);
+        finish();
+      final   String crt_name=signup_name.getText().toString();
+        final String crt_email=signup_email.getText().toString();
+       final  String crt_password=signup_password.getText().toString();
 
      final    Firebase ref = new Firebase("https://cloverboard.firebaseio.com");
 
@@ -125,7 +139,7 @@ public class Signup extends AppCompatActivity {
 
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("name", crt_name);
-                map.put("email",crt_email);
+                map.put("email", crt_email);
                 map.put("uid",result.get("uid"));
 
                 postRef.push().setValue(map);
@@ -136,15 +150,43 @@ public class Signup extends AppCompatActivity {
                       /*  System.out.println("Successfully created user account with uid: " + result.get("uid"));*/
 
 
-                setResult(RESULT_OK, null);
-                finish();
+
             }
 
             @Override
-            public void onError(FirebaseError firebaseError) {
+            public void onError(FirebaseError error) {
                 // there was an error
 
-                onSignupFailed();
+                switch (error.getCode()) {
+
+                    case FirebaseError.EMAIL_TAKEN:
+                        Toast.makeText(getApplicationContext(), "Email Already in use", Toast.LENGTH_SHORT).show();
+                         break;
+
+                    case FirebaseError.NETWORK_ERROR:
+
+                        Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
+                        break;
+
+                    case FirebaseError.UNKNOWN_ERROR:
+                        Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                        break;
+
+
+
+                    default:
+                        Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
+                        break;
+
+
+                }
+
+
+
+
+
+
+
 
             }
         });

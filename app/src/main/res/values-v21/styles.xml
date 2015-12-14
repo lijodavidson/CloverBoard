@@ -42,6 +42,12 @@
     </style>
 
 
+
+
+
+
+
+
     <style name="AppCompatAlertDialogStyle" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="colorAccent">@color/md_red_500</item>
         <item name="android:textColorPrimary">#5c5c5c</item>

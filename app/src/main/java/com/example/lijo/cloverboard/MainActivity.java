@@ -2,6 +2,7 @@ package com.example.lijo.cloverboard;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -22,6 +23,8 @@ import android.widget.Toast;
 import com.example.lijo.cloverboard.Fragments.BedroomFragment;
 import com.example.lijo.cloverboard.Fragments.LivingFragment;
 import com.example.lijo.cloverboard.Fragments.StarredFragment;
+import com.firebase.client.AuthData;
+import com.firebase.client.Firebase;
 
 
 public class MainActivity extends AppCompatActivity  {
@@ -31,12 +34,12 @@ public class MainActivity extends AppCompatActivity  {
     ActionBar actionBar;
     final Context context = this;
     EditText Dialougeedit;
-
+    final      Firebase ref = new Firebase("https://cloverboard.firebaseio.com");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        Firebase.setAndroidContext(this);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -55,6 +58,21 @@ public class MainActivity extends AppCompatActivity  {
         //displays first in nav view
 
         setFragment(0);
+
+
+
+
+        ref.addAuthStateListener(new Firebase.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(AuthData authData) {
+                if (authData != null) {
+                    // user is logged in
+                } else {
+                    // user is not logged in
+                }
+            }
+        });
+
 
 
     }
@@ -103,12 +121,18 @@ public class MainActivity extends AppCompatActivity  {
                                 return true;
 
 
-                           /* case R.id.item_navigation_drawer_drafts:
+                            case R.id.item_navigation_drawer_logout:
                                 menuItem.setChecked(true);
+                                ref.unauth();
+                                Controller.clearCache(getApplicationContext());
+                                Intent z = new Intent(getApplicationContext(), login.class);
+                                startActivity(z);
+                                finish();
+
+
 
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-*/
                         /*    case R.id.item_navigation_drawer_settings:
                                 menuItem.setChecked(true);
 

@@ -9,4 +9,7 @@
     <string name="login_password">Password</string>
     <string name="login_button">Login</string>
     <string name="login_register_text">REGISTER</string>
+    <string name="title_activity_reset_password">ResetPassword</string>
+    <string name="title_activity_password_reset">PasswordReset</string>
+    <string name="password_serest_mail">Send Mail</string>
 </resources>
