@@ -13,10 +13,19 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.lijo.cloverboard.MainActivity;
+import com.example.lijo.cloverboard.OnFragmentSelectedListener;
 import com.example.lijo.cloverboard.R;
 
 
 public class StarredFragment extends Fragment {
+
+    public StarredFragment(OnFragmentSelectedListener onFragmentSelectedListener) {
+
+    }
+
+    public StarredFragment() {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -24,7 +33,8 @@ public class StarredFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_starred, container, false);
 
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Kitchen");
+        /*((MainActivity) getActivity()).getSupportActionBar().setTitle("Kitchen");*/
+
 
 
 

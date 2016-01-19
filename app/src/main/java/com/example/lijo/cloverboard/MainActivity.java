@@ -4,19 +4,29 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 
@@ -26,12 +36,19 @@ import com.example.lijo.cloverboard.Fragments.StarredFragment;
 import com.firebase.client.AuthData;
 import com.firebase.client.Firebase;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class MainActivity extends AppCompatActivity  {
 
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     ActionBar actionBar;
+    private TabLayout tabLayout;
+    private CollapsingToolbarLayout collapsingToolbar;
+    private ImageView imageView;
+    private ViewPager viewPager;
     final Context context = this;
     EditText Dialougeedit;
     final      Firebase ref = new Firebase("https://cloverboard.firebaseio.com");
@@ -40,8 +57,98 @@ public class MainActivity extends AppCompatActivity  {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Firebase.setAndroidContext(this);
+
+        imageView=(ImageView) findViewById(R.id.header);
+        imageView.setImageResource(R.drawable.kitchen);
+        collapsingToolbar = (CollapsingToolbarLayout) findViewById(
+                R.id.collapse_toolbar);
+
+        collapsingToolbar.setTitleEnabled(false);
+
+
+
+
+
+
+
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("HOME");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        viewPager = (ViewPager) findViewById(R.id.viewpager);
+        setupViewPager(viewPager);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+//                Log.d("Position : ", String.valueOf(position));
+            }
+
+            @Override
+            public void onPageSelected(final int position) {
+                Log.d("Position1 : ", String.valueOf(position));
+
+                Animation image_animation_fade_out = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_out);
+                final Animation image_animation_fade_in = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
+
+
+                image_animation_fade_out.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+//                        toolbarImage.setVisibility(View.INVISIBLE);
+                        switch (position) {
+
+                            case 0:
+                                imageView.setImageResource(R.drawable.kitchen);
+                                break;
+                            case 1:
+                                imageView.setImageResource(R.drawable.beds);
+                                break;
+
+                            case 2:
+                                imageView.setImageResource(R.drawable.bed1);
+                                break;
+
+                            case 3:
+                                imageView.setImageResource(R.drawable.bed2);
+                                break;
+
+                            case 4:
+                                imageView.setImageResource(R.drawable.top);
+                                break;
+                        }
+
+                        imageView.setAnimation(image_animation_fade_in);
+                        imageView.startAnimation(image_animation_fade_in);
+
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+
+                imageView.setAnimation(image_animation_fade_out);
+                imageView.startAnimation(image_animation_fade_out);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
+
+
+        tabLayout = (TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
 
         actionBar = getSupportActionBar();
         actionBar.setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
@@ -77,12 +184,85 @@ public class MainActivity extends AppCompatActivity  {
 
     }
 
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFrag(new BedroomFragment(new OnFragmentSelectedListener() {
+            @Override
+            public void onFragmentSelected(int position) {
+            }
+        }),"Bedroom");
+
+
+adapter.addFrag(new StarredFragment(new OnFragmentSelectedListener() {
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+    public void onFragmentSelected(int position) {
+
     }
+}),"Kitchen");
+
+
+        adapter.addFrag(new LivingFragment(new OnFragmentSelectedListener() {
+            @Override
+            public void onFragmentSelected(int position) {
+
+            }
+        }),"Hall");
+
+
+        viewPager.setAdapter(adapter);
+
+
+
+    }
+
+
+    class ViewPagerAdapter extends FragmentPagerAdapter {
+        private final List<Fragment> mFragmentList = new ArrayList<>();
+        private final List<String> mFragmentTitleList = new ArrayList<>();
+
+
+        public ViewPagerAdapter(FragmentManager manager)
+        {
+            super(manager);
+        }
+
+
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentList.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentList.size();
+        }
+
+        public void addFrag(Fragment fragment, String title) {
+            mFragmentList.add(fragment);
+            mFragmentTitleList.add(title);
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mFragmentTitleList.get(position);
+        }
+
+
+       /* public void addFrag(BedroomFragment bedroomFragment) {
+        }
+
+        public void addFrag(StarredFragment starredFragment) {
+        }*/
+    }
+
+
+
+
+
+
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -189,11 +369,12 @@ public class MainActivity extends AppCompatActivity  {
                 BedroomFragment bedroomFragment = new BedroomFragment();
                 fragmentTransaction.replace(R.id.fragment, bedroomFragment);
                 fragmentTransaction.commit();
+
                 break;
             case 1:
                 fragmentManager = getSupportFragmentManager();
                 fragmentTransaction = fragmentManager.beginTransaction();
-                StarredFragment starredFragment = new StarredFragment();
+                StarredFragment starredFragment = new StarredFragment( );
                 fragmentTransaction.replace(R.id.fragment, starredFragment);
                 fragmentTransaction.commit();
                 break;

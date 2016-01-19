@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.lijo.cloverboard"
-        minSdkVersion 19
+        minSdkVersion 21
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
@@ -29,8 +29,11 @@ dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
+    compile('org.eclipse.paho:org.eclipse.paho.android.service:1.0.2') {
+        exclude module: 'support-v4'
+    }
 
 
 
-    compile files('libs/firebase-client-android-2.4.1.jar')
+
 }

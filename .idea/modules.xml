@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CloverBoard.iml" filepath="$PROJECT_DIR$/CloverBoard.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/clovtab.iml" filepath="$PROJECT_DIR$/clovtab.iml" />
     </modules>
   </component>
 </project>

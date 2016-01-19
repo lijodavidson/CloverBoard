@@ -11,10 +11,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.lijo.cloverboard.MainActivity;
+import com.example.lijo.cloverboard.OnFragmentSelectedListener;
 import com.example.lijo.cloverboard.R;
 
 
 public class LivingFragment extends Fragment {
+
+    public LivingFragment(OnFragmentSelectedListener onFragmentSelectedListener) {
+    }
+
+    public LivingFragment() {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -22,7 +30,7 @@ public class LivingFragment extends Fragment {
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_living, container, false);
 
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Living Room");
+      /*  ((MainActivity) getActivity()).getSupportActionBar().setTitle("Living Room");*/
 
 
 

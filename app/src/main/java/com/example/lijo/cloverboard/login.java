@@ -64,7 +64,7 @@ forgot.setOnClickListener(new View.OnClickListener() {
     public void onClick(View view) {
 
 
-        Intent intent = new Intent(getApplicationContext(), PasswordReset.class);
+        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
 
         //Intent intent=new Intent();
         //   intent.setClass(this,Signup.class);

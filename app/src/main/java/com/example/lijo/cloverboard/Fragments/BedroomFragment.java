@@ -13,12 +13,21 @@ import android.view.ViewGroup;
 import android.widget.Toolbar;
 
 import com.example.lijo.cloverboard.MainActivity;
+import com.example.lijo.cloverboard.OnFragmentSelectedListener;
 import com.example.lijo.cloverboard.R;
 
 
 public class BedroomFragment extends Fragment {
 
-    CollapsingToolbarLayout collapsingToolbar;
+    /*private OnFragmentSelectedListener onFragmentSelectedListener;*/
+    public BedroomFragment(OnFragmentSelectedListener onFragmentSelectedListener) {
+      /*  this.onFragmentSelectedListener = onFragmentSelectedListener;*/
+
+    }
+
+    public BedroomFragment() {
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -27,7 +36,11 @@ public class BedroomFragment extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_bedroom, container, false);
 
 
-        ((MainActivity) getActivity()).getSupportActionBar().setTitle("Bedroom new");
+     /*   ((MainActivity) getActivity()).getSupportActionBar().setTitle("Bedroom new");*/
+
+        /*onFragmentSelectedListener.onFragmentSelected(1);
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_bedroom, container, false);*/
 
 
 

@@ -20,6 +20,12 @@ import android.widget.Toast;
 import com.firebase.client.Firebase;
 import com.firebase.client.FirebaseError;
 
+import org.eclipse.paho.android.service.MqttAndroidClient;
+import org.eclipse.paho.client.mqttv3.IMqttActionListener;
+import org.eclipse.paho.client.mqttv3.IMqttToken;
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,37 +33,74 @@ import static com.example.lijo.cloverboard.R.drawable.ic_action_content_drafts;
 
 public class Signup extends AppCompatActivity {
 
-    private static final String TAG = "SignupActivity";
+
+    private static final String TAG ="MQTTActivity" ;
     private EditText signup_email;
     private EditText signup_password;
     private EditText signup_name;
-    private Button signup_button;
-private TextView already_login;
+    MqttAndroidClient client;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Firebase.setAndroidContext(this);
         setContentView(R.layout.activity_signup);
-
         signup_email=(EditText)findViewById(R.id.input_email);
         signup_password=(EditText)findViewById(R.id.input_password);
         signup_name=(EditText)findViewById(R.id.input_name);
-        signup_button=(Button)findViewById(R.id.btn_signup);
-already_login=(TextView)findViewById(R.id.link_login);
+        Button signup_button = (Button) findViewById(R.id.btn_signup);
+        TextView already_login = (TextView) findViewById(R.id.link_login);
+
+
+        String clientId = MqttClient.generateClientId();
+        client = new MqttAndroidClient(this.getApplicationContext(), "tcp://10.50.8.24:9244", clientId);
+
+        try {
+            IMqttToken token = client.connect();
+            token.setActionCallback(new IMqttActionListener() {
+                @Override
+                public void onSuccess(IMqttToken asyncActionToken) {
+                    // We are connected
+                    Log.d(TAG, "onSuccess");
+                    Toast.makeText(getApplicationContext(), "Connection Successful", Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onFailure(IMqttToken asyncActionToken, Throwable exception) {
+                    // Something went wrong e.g. connection timeout or firewall problems
+                    Log.d(TAG, "onFailure");
+
+                    Toast.makeText(getApplicationContext(), "Connection Unsuccessful", Toast.LENGTH_SHORT).show();
+
+
+
+
+                }
+
+
+            });
+        } catch (MqttException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
         signup_button.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
 
-                signup();
-
 
             }
-
-
         });
-
 
         already_login.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,147 +119,6 @@ already_login=(TextView)findViewById(R.id.link_login);
 
     }
 
-    private void signup() {
-
-
-
-
-
-        Log.d(TAG, "Signup");
-
-        if (!validate()) {
-            Toast.makeText(getApplicationContext(), "Input proper Credentials ", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        signup_button.setEnabled(false);
-
-        final ProgressDialog progressDialog = new ProgressDialog(Signup.this,
-                R.style.AppCompatAlertDialogStyle);
-        progressDialog.setIndeterminate(true);
-        progressDialog.setMessage("Creating Account...");
-        progressDialog.show();
-
-
-
-
-        new android.os.Handler().postDelayed(
-                new Runnable() {
-                    public void run() {
-                        // On complete call either onSignupSuccess or onSignupFailed
-                        // depending on success
-                        onSignupSuccess();
-                        // onSignupFailed();
-                        progressDialog.dismiss();
-                    }
-                }, 3000);
-
-
-
-
-    }
-
-    private void onSignupSuccess() {
-        signup_button.setEnabled(true);
-
-
-        setResult(RESULT_OK, null);
-        finish();
-      final   String crt_name=signup_name.getText().toString();
-        final String crt_email=signup_email.getText().toString();
-       final  String crt_password=signup_password.getText().toString();
-
-     final    Firebase ref = new Firebase("https://cloverboard.firebaseio.com");
-
-
-        ref.createUser(crt_email, crt_password, new Firebase.ValueResultHandler<Map<String, Object>>()
-
-        {
-            @Override
-            public void onSuccess(Map<String, Object> result) {
-
-                Firebase postRef = ref.child("users");
-
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put("name", crt_name);
-                map.put("email", crt_email);
-                map.put("uid",result.get("uid"));
-
-                postRef.push().setValue(map);
-
-
-                Toast.makeText(getApplicationContext(), "user created", Toast.LENGTH_SHORT).show();
-
-                      /*  System.out.println("Successfully created user account with uid: " + result.get("uid"));*/
-
-
-
-            }
-
-            @Override
-            public void onError(FirebaseError error) {
-                // there was an error
-
-                switch (error.getCode()) {
-
-                    case FirebaseError.EMAIL_TAKEN:
-                        Toast.makeText(getApplicationContext(), "Email Already in use", Toast.LENGTH_SHORT).show();
-                         break;
-
-                    case FirebaseError.NETWORK_ERROR:
-
-                        Toast.makeText(getApplicationContext(), "Network Error", Toast.LENGTH_SHORT).show();
-                        break;
-
-                    case FirebaseError.UNKNOWN_ERROR:
-                        Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
-                        break;
-
-
-
-                    default:
-                        Toast.makeText(getApplicationContext(), "Something Went Wrong", Toast.LENGTH_SHORT).show();
-                        break;
-
-
-                }
-
-
-
-
-
-
-
-
-            }
-        });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-
-    private void onSignupFailed() {
-
-
-        Toast.makeText(getApplicationContext(), "error user id already exist", Toast.LENGTH_SHORT).show();
-
-
-    }
 
 
 
