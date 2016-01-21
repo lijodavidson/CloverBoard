@@ -51,6 +51,9 @@ public class MainActivity extends AppCompatActivity  {
     private ViewPager viewPager;
     final Context context = this;
     EditText Dialougeedit;
+    private ViewPagerAdapter adapter;
+    private MenuItem menuItem;
+    private  NavigationView navigationView;
     final      Firebase ref = new Firebase("https://cloverboard.firebaseio.com");
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,34 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onPageSelected(final int position) {
                 Log.d("Position1 : ", String.valueOf(position));
+
+switch (position){
+
+
+    case 0: navigationView.setCheckedItem(R.id.item_navigation_bedroom);
+        break;
+
+
+    case 1: navigationView.setCheckedItem(R.id.item_navigation_drawer_starred);
+        break;
+
+    case 2: navigationView.setCheckedItem(R.id.item_navigation_living_room);
+        break;
+
+
+
+
+
+}
+
+
+
+
+
+
+
+navigationView.setCheckedItem(position);
+
 
                 Animation image_animation_fade_out = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_out);
                 final Animation image_animation_fade_in = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_in);
@@ -156,7 +187,7 @@ public class MainActivity extends AppCompatActivity  {
 
         drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+         navigationView = (NavigationView) findViewById(R.id.navigation_view);
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
         }
@@ -164,7 +195,7 @@ public class MainActivity extends AppCompatActivity  {
         setupNavigationDrawerContent(navigationView);
         //displays first in nav view
 
-        setFragment(0);
+      /*  setFragment(0);*/
 
 
 
@@ -185,7 +216,7 @@ public class MainActivity extends AppCompatActivity  {
     }
 
     private void setupViewPager(ViewPager viewPager) {
-        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+         adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new BedroomFragment(new OnFragmentSelectedListener() {
             @Override
             public void onFragmentSelected(int position) {
@@ -284,6 +315,7 @@ adapter.addFrag(new StarredFragment(new OnFragmentSelectedListener() {
                             case R.id.item_navigation_bedroom:
                                 menuItem.setChecked(true);
                                 setFragment(0);
+
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
                             case R.id.item_navigation_drawer_starred:
@@ -297,7 +329,9 @@ adapter.addFrag(new StarredFragment(new OnFragmentSelectedListener() {
                             case R.id.item_navigation_living_room:
                                 menuItem.setChecked(true);
                                 setFragment(2);
+
                                 drawerLayout.closeDrawer(GravityCompat.START);
+
                                 return true;
 
 
@@ -360,39 +394,50 @@ adapter.addFrag(new StarredFragment(new OnFragmentSelectedListener() {
 
 
     public void setFragment(int position) {
-        android.support.v4.app.FragmentManager fragmentManager;
-        FragmentTransaction fragmentTransaction;
-        switch (position) {
-            case 0:
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                BedroomFragment bedroomFragment = new BedroomFragment();
-                fragmentTransaction.replace(R.id.fragment, bedroomFragment);
-                fragmentTransaction.commit();
 
-                break;
-            case 1:
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-                StarredFragment starredFragment = new StarredFragment( );
-                fragmentTransaction.replace(R.id.fragment, starredFragment);
-                fragmentTransaction.commit();
-                break;
+        viewPager.setCurrentItem(position);
+//        android.support.v4.app.FragmentManager fragmentManager;
+//        FragmentTransaction fragmentTransaction;
+//        fragmentManager = getSupportFragmentManager();
+//        fragmentTransaction = fragmentManager.beginTransaction();
+//        fragmentTransaction.replace(R.id.viewpager, adapter.getItem(position));
+//        fragmentTransaction.commit();
 
-
-            case 2:
-                fragmentManager = getSupportFragmentManager();
-                fragmentTransaction = fragmentManager.beginTransaction();
-               /* StarredFragment starredFragment = new StarredFragment();*/
-                LivingFragment livingFragment=new LivingFragment();
-                fragmentTransaction.replace(R.id.fragment, livingFragment);
-               /* fragmentTransaction.replace(R.id.fragment, starredFragment);*/
-                fragmentTransaction.commit();
-                break;
-
-
-
-        }
+//        switch (position) {
+//            case 0:
+//
+//
+//
+//                fragmentManager = getSupportFragmentManager();
+//                fragmentTransaction = fragmentManager.beginTransaction();
+//                BedroomFragment bedroomFragment = new BedroomFragment();
+//                fragmentTransaction.replace(R.id.fragment, bedroomFragment);
+//                fragmentTransaction.commit();
+//                adapter.getItem(position);
+//
+//                break;
+//            case 1:
+//                fragmentManager = getSupportFragmentManager();
+//                fragmentTransaction = fragmentManager.beginTransaction();
+//                StarredFragment starredFragment = new StarredFragment( );
+//                fragmentTransaction.replace(R.id.fragment, starredFragment);
+//                fragmentTransaction.commit();
+//                break;
+//
+//
+//            case 2:
+//                fragmentManager = getSupportFragmentManager();
+//                fragmentTransaction = fragmentManager.beginTransaction();
+//
+//                LivingFragment livingFragment=new LivingFragment();
+//                fragmentTransaction.replace(R.id.fragment, livingFragment);
+//
+//                fragmentTransaction.commit();
+//                break;
+//
+//
+//
+//        }
     }
 
 
