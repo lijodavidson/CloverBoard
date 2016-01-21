@@ -4,6 +4,7 @@ package com.example.lijo.cloverboard.Fragments;
  * Created by LIJO on 11/20/2015.
  */
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
@@ -27,15 +28,16 @@ import butterknife.ButterKnife;
 
 
 public class BedroomFragment extends Fragment {
-   private List<CardItemModel> carditemmodel=new ArrayList<>();
+
+  private List <CardItemModel> carditemmodel=new ArrayList<>();
     /*private List<CardItemModel> cardItems = new ArrayList<>(30);*/
     /*private MainActivity mainActivity;*/
     private MainActivity mainActivity;
-    protected BedroomFragment bedroom;
+    protected BedroomFragment bedroomFragment;
     private RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
 
-
+    Context thiscontext;
     /*private OnFragmentSelectedListener onFragmentSelectedListener;*/
     public BedroomFragment(OnFragmentSelectedListener onFragmentSelectedListener) {
       /*  this.onFragmentSelectedListener = onFragmentSelectedListener;*/
@@ -49,15 +51,13 @@ public class BedroomFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        thiscontext = container.getContext();
         // Inflate the layout for this fragment
         final View view = inflater.inflate(R.layout.fragment_bedroom, container, false);
 
-/*
-        recyclerView = (RecyclerView)view.findViewById(R.id.fab_recycler_view);
-*/
+        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
 
-     /*   setupRecyclerView();*/
+        setupRecyclerView();
 
      /*   ((MainActivity) getActivity()).getSupportActionBar().setTitle("Bedroom new");*/
 
@@ -70,47 +70,44 @@ public class BedroomFragment extends Fragment {
         return view;
     }
 
-/*
     private void setupRecyclerView(){
-        recyclerView.setLayoutManager(new LinearLayoutManager(mainActivity));
+        recyclerView.setLayoutManager(new LinearLayoutManager(thiscontext));
         recyclerView.setHasFixedSize(true);
         initializeCardItemList();
         recyclerAdapter = new RecyclerAdapter(carditemmodel);
         recyclerView.setAdapter(recyclerAdapter);
     }
-*/
 
-/*
-    private void initializeCardItemList(){
+    private void initializeCardItemList() {
 
 
-
-        carditemmodel.add(new CardItemModel("lijo","joby"));
-        carditemmodel.add(new CardItemModel("sijo","joby"));
-        carditemmodel.add(new CardItemModel("lissy","joby"));
+        carditemmodel.add(new CardItemModel("lijo", "1"));
+        CardItemModel cardItemModel;
 
 
-       */
-/* CardItemModel cardItemModel;
-        String[] cardTitles = getResources().getStringArray(R.array.card_titles);
-        String[] cardContents = getResources().getStringArray(R.array.card_contents);
-        final int length = cardTitles.length;
-        for(int i=0;i<length;i++){
-            cardItemModel = new CardItemModel(cardTitles[i],cardContents[i]);
-            cardItems.add(cardItemModel);
-        }*//*
+
+    }
+
+    /* CardItemModel cardItemModel;
+            String[] cardTitles = getResources().getStringArray(R.array.card_titles);
+            String[] cardContents = getResources().getStringArray(R.array.card_contents);
+            final int length = cardTitles.length;
+            for(int i=0;i<length;i++){
+                cardItemModel = new CardItemModel(cardTitles[i],cardContents[i]);
+                cardItems.add(cardItemModel);
+            }*//*
 
     }
 */
-    public void addItem(String title,String content){
+   /* public void addItem(String title,String content){
         recyclerAdapter.cardItems.add(new CardItemModel(title,content));
         recyclerAdapter.notifyDataSetChanged();
-    }
+    }*/
 
-    public void removeItem(){
+    /*public void removeItem(){
         recyclerAdapter.cardItems.remove(recyclerAdapter.cardItems.size() - 1);
         recyclerAdapter.notifyDataSetChanged();
     }
-
+*/
 
 }
