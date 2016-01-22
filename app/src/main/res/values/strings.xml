@@ -12,4 +12,6 @@
     <string name="title_activity_reset_password">ResetPassword</string>
     <string name="title_activity_password_reset">PasswordReset</string>
     <string name="password_serest_mail">Send Mail</string>
+    <string name="edit_appliance">Edit Appliance</string>
+    <string name="schedule_appliance">Schedule</string>
 </resources>

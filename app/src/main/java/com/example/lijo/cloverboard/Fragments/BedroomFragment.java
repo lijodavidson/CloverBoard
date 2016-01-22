@@ -29,14 +29,14 @@ import butterknife.ButterKnife;
 
 public class BedroomFragment extends Fragment {
 
-  private List <CardItemModel> carditemmodel=new ArrayList<>();
+
     /*private List<CardItemModel> cardItems = new ArrayList<>(30);*/
     /*private MainActivity mainActivity;*/
     private MainActivity mainActivity;
     protected BedroomFragment bedroomFragment;
     private RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
-
+    private View view;
     Context thiscontext;
     /*private OnFragmentSelectedListener onFragmentSelectedListener;*/
     public BedroomFragment(OnFragmentSelectedListener onFragmentSelectedListener) {
@@ -53,7 +53,7 @@ public class BedroomFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         thiscontext = container.getContext();
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_bedroom, container, false);
+        view = inflater.inflate(R.layout.fragment_bedroom, container, false);
 
         recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
 
@@ -71,19 +71,27 @@ public class BedroomFragment extends Fragment {
     }
 
     private void setupRecyclerView(){
-        recyclerView.setLayoutManager(new LinearLayoutManager(thiscontext));
+       /* recyclerView.setLayoutManager(new LinearLayoutManager(thiscontext));
         recyclerView.setHasFixedSize(true);
-        initializeCardItemList();
+
         recyclerAdapter = new RecyclerAdapter(carditemmodel);
-        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setAdapter(recyclerAdapter);*/
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView
+                .setLayoutManager(new LinearLayoutManager(getActivity()));
+        initializeCardItemList();
+
     }
 
     private void initializeCardItemList() {
 
-
-        carditemmodel.add(new CardItemModel("lijo", "1"));
-        CardItemModel cardItemModel;
-
+        ArrayList <CardItemModel> carditemmodel=new ArrayList<>();
+        carditemmodel.add(new CardItemModel("lijo", "Light"));
+        carditemmodel.add(new CardItemModel("sijo","Fan"));
+        carditemmodel.add(new CardItemModel("sijo", "Light"));
+RecyclerAdapter adapter=new RecyclerAdapter(carditemmodel);
+        recyclerView.setAdapter(adapter);
 
 
     }

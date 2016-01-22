@@ -8,8 +8,11 @@
     android:layout_marginLeft="@dimen/cardMarginHorizontal"
     android:layout_marginRight="@dimen/cardMarginHorizontal"
     android:layout_marginTop="@dimen/cardMarginVertical"
-    app:cardCornerRadius="3dp"
-    app:cardElevation="3dp"
+    app:cardCornerRadius="@dimen/card_corner_radius"
+    app:cardElevation="@dimen/card_resting_elivation"
+    app:cardMaxElevation="@dimen/card_raised_elivation"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground"
     app:cardPreventCornerOverlap="false"
     app:contentPadding="0dp"
     android:background="@color/md_amber_500">
@@ -18,17 +21,20 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageview_radio_logo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_above="@+id/card_content"
+        <Button
+            android:id="@+id/powerbutton"
+            android:layout_width="@dimen/button_size"
+            android:layout_height="@dimen/button_size"
+            style="?android:attr/borderlessButtonStyle"
+            android:longClickable="true"
+            android:layout_marginEnd="@dimen/button_left_margin"
+            android:layout_centerVertical="true"
             android:layout_alignParentEnd="true" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@+id/imageview_radio_logo"
+
             android:layout_centerVertical="true"
             android:layout_marginLeft="24dp"
             android:id="@+id/relativeLayout">
@@ -44,7 +50,8 @@
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:id="@+id/seekBar"
-            android:paddingLeft="60dp"
+            android:paddingStart="@dimen/seekbar_padding_left"
+            android:paddingEnd="@dimen/seekbar_padding_right"
             android:paddingBottom="0dp"
             android:layout_centerVertical="true"
             android:layout_alignParentStart="true" />
@@ -53,12 +60,24 @@
         android:id="@+id/card_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
-            android:text="(102.2)"
-        android:textColor="@color/md_pink_500_25"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true" />
+        android:layout_marginLeft="@dimen/card_text_margin"
+        android:layout_marginRight="@dimen/card_text_margin"
+         android:textSize="@dimen/card_text_size"
+        android:textColor="@color/md_red_500"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/card_text_margin" />
+
+        <ImageButton
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+
+            android:id="@+id/morevert"
+            android:clickable="true"
+
+            android:background="@drawable/more_vert_grey"
+            android:layout_alignTop="@+id/card_content"
+            android:layout_alignParentStart="true" />
 
     </RelativeLayout>
 

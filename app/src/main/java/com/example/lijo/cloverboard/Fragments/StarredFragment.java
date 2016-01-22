@@ -4,6 +4,7 @@ package com.example.lijo.cloverboard.Fragments;
  * Created by LIJO on 11/20/2015.
  */
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
@@ -26,16 +27,17 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 
-public class StarredFragment extends Fragment {
-    private List<CardItemModel> carditemmodel=new ArrayList<>(4);
+public class StarredFragment extends Fragment{
+
+
     /*private List<CardItemModel> cardItems = new ArrayList<>(30);*/
     /*private MainActivity mainActivity;*/
     private MainActivity mainActivity;
-    protected BedroomFragment bedroom;
+    protected BedroomFragment bedroomFragment;
     private RecyclerView recyclerView;
     private RecyclerAdapter recyclerAdapter;
-
-
+    private View view;
+    Context thiscontext;
     /*private OnFragmentSelectedListener onFragmentSelectedListener;*/
     public StarredFragment(OnFragmentSelectedListener onFragmentSelectedListener) {
       /*  this.onFragmentSelectedListener = onFragmentSelectedListener;*/
@@ -49,11 +51,11 @@ public class StarredFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        thiscontext = container.getContext();
         // Inflate the layout for this fragment
-        final View view = inflater.inflate(R.layout.fragment_starred, container, false);
+        view = inflater.inflate(R.layout.fragment_starred, container, false);
 
-        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView1);
+        recyclerView = (RecyclerView)view.findViewById(R.id.recyclerView);
 
         setupRecyclerView();
 
@@ -69,19 +71,29 @@ public class StarredFragment extends Fragment {
     }
 
     private void setupRecyclerView(){
-        recyclerView.setLayoutManager(new LinearLayoutManager(mainActivity));
+       /* recyclerView.setLayoutManager(new LinearLayoutManager(thiscontext));
         recyclerView.setHasFixedSize(true);
-        initializeCardItemList();
+
         recyclerAdapter = new RecyclerAdapter(carditemmodel);
-        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setAdapter(recyclerAdapter);*/
+        recyclerView = (RecyclerView) view.findViewById(R.id.recyclerView1);
+        recyclerView.setHasFixedSize(true);
+        recyclerView
+                .setLayoutManager(new LinearLayoutManager(getActivity()));
+        initializeCardItemList();
+
     }
 
     private void initializeCardItemList() {
 
+        ArrayList <CardItemModel> carditemmodel=new ArrayList<>();
+        carditemmodel.add(new CardItemModel("lijo", "Light"));
+        carditemmodel.add(new CardItemModel("sijo","Fan"));
+        carditemmodel.add(new CardItemModel("sijo", "Light2"));
+        RecyclerAdapter adapter=new RecyclerAdapter(carditemmodel);
+        recyclerView.setAdapter(adapter);
 
-        carditemmodel.add(new CardItemModel("lijo", "joby"));
-        carditemmodel.add(new CardItemModel("sijo", "joby"));
-        carditemmodel.add(new CardItemModel("lissy", "joby"));
+
     }
 
     /* CardItemModel cardItemModel;
@@ -95,15 +107,15 @@ public class StarredFragment extends Fragment {
 
     }
 */
-    public void addItem(String title,String content){
+   /* public void addItem(String title,String content){
         recyclerAdapter.cardItems.add(new CardItemModel(title,content));
         recyclerAdapter.notifyDataSetChanged();
-    }
+    }*/
 
-    public void removeItem(){
+    /*public void removeItem(){
         recyclerAdapter.cardItems.remove(recyclerAdapter.cardItems.size() - 1);
         recyclerAdapter.notifyDataSetChanged();
     }
-
+*/
 
 }
