@@ -14,4 +14,6 @@
     <string name="password_serest_mail">Send Mail</string>
     <string name="edit_appliance">Edit Appliance</string>
     <string name="schedule_appliance">Schedule</string>
+    <string name="edit_appliance_nam">Name</string>
+    <string name="title_activity_edit_appliances">edit_appliances</string>
 </resources>

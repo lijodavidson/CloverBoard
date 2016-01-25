@@ -1,7 +1,9 @@
 package com.example.lijo.cloverboard;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -120,7 +122,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
             @Override
             public void onClick(final View view) {
 
-                PopupMenu popup = new PopupMenu(view.getContext(), view);
+                PopupMenu popup = new PopupMenu(view.getContext(), view, Gravity.TOP );
                 popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -129,7 +131,8 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
                         switch (menuItem.getItemId()) {
                             case R.id.edit_appliance:
-
+                                Intent i = new Intent(view.getRootView().getContext(), edit_appliances.class);
+                                view.getRootView().getContext().startActivity(i);
                                 return true;
 
 
