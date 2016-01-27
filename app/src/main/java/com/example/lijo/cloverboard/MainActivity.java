@@ -18,6 +18,7 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -25,6 +26,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -40,7 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -53,34 +55,43 @@ public class MainActivity extends AppCompatActivity  {
     EditText Dialougeedit;
     private ViewPagerAdapter adapter;
     private MenuItem menuItem;
-    private String temp="27";
+    private String temp = "27";
     private String text = temp;
-    private int t=27;
-    private  NavigationView navigationView;
-    final      Firebase ref = new Firebase("https://cloverboard.firebaseio.com");
+    private int t = 27;
+    private NavigationView navigationView;
+    long current_time;
+    private boolean isLongPressed = false;
+    Button blue_button;
+  private   Button button;
+    final Firebase ref = new Firebase("https://cloverboard.firebaseio.com");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Firebase.setAndroidContext(this);
 
-        imageView=(ImageView) findViewById(R.id.header);
+        imageView = (ImageView) findViewById(R.id.header);
         imageView.setImageResource(R.drawable.bed);
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(
                 R.id.collapse_toolbar);
 
         collapsingToolbar.setTitleEnabled(false);
 
-
-
-
-
-
-
+        blue_button=(Button)findViewById(R.id.blue_button);
+button=(Button)findViewById(R.id.main_button20);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("HOME");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
+        blueButtonActivity();
+        tempup();
+        tempdown();
+        customizedButton();
+
+
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
@@ -88,38 +99,36 @@ public class MainActivity extends AppCompatActivity  {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 //                Log.d("Position : ", String.valueOf(position));
+                current_time=System.currentTimeMillis();
             }
 
             @Override
             public void onPageSelected(final int position) {
                 Log.d("Position1 : ", String.valueOf(position));
 
-switch (position){
+                Toast.makeText(getApplicationContext(), String.valueOf(System.currentTimeMillis()-current_time), Toast.LENGTH_SHORT).show();
+
+                switch (position) {
 
 
-    case 0: navigationView.setCheckedItem(R.id.item_navigation_bedroom);
-        break;
+                    case 0:
+                        navigationView.setCheckedItem(R.id.item_navigation_bedroom);
+                        break;
 
 
-    case 1: navigationView.setCheckedItem(R.id.item_navigation_drawer_starred);
-        break;
+                    case 1:
+                        navigationView.setCheckedItem(R.id.item_navigation_drawer_starred);
+                        break;
 
-    case 2: navigationView.setCheckedItem(R.id.item_navigation_living_room);
-        break;
-
-
-
-
-
-}
+                    case 2:
+                        navigationView.setCheckedItem(R.id.item_navigation_living_room);
+                        break;
 
 
+                }
 
 
-
-
-
-navigationView.setCheckedItem(position);
+                navigationView.setCheckedItem(position);
 
 
                 Animation image_animation_fade_out = AnimationUtils.loadAnimation(getApplicationContext(), android.R.anim.fade_out);
@@ -139,14 +148,14 @@ navigationView.setCheckedItem(position);
                         switch (position) {
 
                             case 0:
-                                imageView.setImageResource(R.drawable.bed);
+                                imageView.setImageResource(R.drawable.bedroom_header);
                                 break;
                             case 1:
-                                imageView.setImageResource(R.drawable.kitchen);
+                                imageView.setImageResource(R.drawable.kitchen_header1);
                                 break;
 
                             case 2:
-                                imageView.setImageResource(R.drawable.living);
+                                imageView.setImageResource(R.drawable.living_header);
                                 break;
 
                             case 3:
@@ -190,7 +199,7 @@ navigationView.setCheckedItem(position);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
 
-         navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        navigationView = (NavigationView) findViewById(R.id.navigation_view);
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
         }
@@ -199,8 +208,6 @@ navigationView.setCheckedItem(position);
         //displays first in nav view
 
       /*  setFragment(0);*/
-
-
 
 
         ref.addAuthStateListener(new Firebase.AuthStateListener() {
@@ -215,24 +222,113 @@ navigationView.setCheckedItem(position);
         });
 
 
+    }
+
+    private void customizedButton() {
+        button.setBackgroundResource(R.drawable.off);
+        button.setOnClickListener(new View.OnClickListener() {
+            boolean isOddClicked = true;
+            public void onClick(View v) {
+
+
+                if (!isLongPressed) {
+                    if (isOddClicked) {
+                        button.setBackgroundResource(R.drawable.on);
+                        isOddClicked = false;
+
+                    } else {
+                        button.setBackgroundResource(R.drawable.off);
+                        isOddClicked = true;
+                    }
+                }
+            }
+        });
+        button.setOnLongClickListener(new View.OnLongClickListener() {
+            boolean isLongPressed = true;
+
+            @Override
+            public boolean onLongClick(View v) {
+                if (isLongPressed) {
+                    button.setBackgroundResource(R.drawable.power);
+                    isLongPressed = false;
+
+                } else {
+
+                    isLongPressed = true;
+                }
+                return true;
+            }
+        });
 
     }
 
+    private void tempdown() {
+        Button tempdown = (Button) findViewById(R.id.dec_temp);
+        tempdown.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if(t>16)
+                {
+                    t = Integer.parseInt(temp);
+                    t=t-1;
+                    temp = String.valueOf(t);
+                    text = temp;
+                    blue_button.setText(Html.fromHtml(text + "<sup><small>°</small></sup>"+"<sup><sup><small><small><small>c</small></small></small></sup></sup>"));
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(), "This is the minimum limit",
+                            Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
+    }
+
+    private void tempup() {
+
+        blue_button.setText(Html.fromHtml(text + "<sup><small>°</small></sup>" + "<sup><sup><small><small><small>c</small></small></small></sup></sup>"));
+        Button tempup = (Button) findViewById(R.id.inc_temp);
+        tempup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (t < 30) {
+                    t = Integer.parseInt(temp);
+                    t = t + 1;
+                    temp = String.valueOf(t);
+                    text = temp;
+                    blue_button.setText(Html.fromHtml(text + "<sup><small>°</small></sup>"+"<sup><sup><small><small><small>c</small></small></small></sup></sup>"));
+                } else {
+                    Toast.makeText(getApplicationContext(), "This is the maximum limit",
+                            Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+
+    }
+
+    private void blueButtonActivity() {
+    }
+
     private void setupViewPager(ViewPager viewPager) {
-         adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFrag(new BedroomFragment(new OnFragmentSelectedListener() {
             @Override
             public void onFragmentSelected(int position) {
             }
-        }),"Bedroom");
+        }), "Bedroom");
 
 
-adapter.addFrag(new StarredFragment(new OnFragmentSelectedListener() {
-    @Override
-    public void onFragmentSelected(int position) {
+        adapter.addFrag(new StarredFragment(new OnFragmentSelectedListener() {
+            @Override
+            public void onFragmentSelected(int position) {
 
-    }
-}),"Kitchen");
+            }
+        }), "Kitchen");
 
 
         adapter.addFrag(new LivingFragment(new OnFragmentSelectedListener() {
@@ -240,11 +336,10 @@ adapter.addFrag(new StarredFragment(new OnFragmentSelectedListener() {
             public void onFragmentSelected(int position) {
 
             }
-        }),"Hall");
+        }), "Hall");
 
 
         viewPager.setAdapter(adapter);
-
 
 
     }
@@ -255,11 +350,9 @@ adapter.addFrag(new StarredFragment(new OnFragmentSelectedListener() {
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
 
-        public ViewPagerAdapter(FragmentManager manager)
-        {
+        public ViewPagerAdapter(FragmentManager manager) {
             super(manager);
         }
-
 
 
         @Override
@@ -289,13 +382,6 @@ adapter.addFrag(new StarredFragment(new OnFragmentSelectedListener() {
         public void addFrag(StarredFragment starredFragment) {
         }*/
     }
-
-
-
-
-
-
-
 
 
     @Override
@@ -347,7 +433,6 @@ adapter.addFrag(new StarredFragment(new OnFragmentSelectedListener() {
                                 finish();
 
 
-
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
                         /*    case R.id.item_navigation_drawer_settings:
@@ -364,13 +449,10 @@ adapter.addFrag(new StarredFragment(new OnFragmentSelectedListener() {
 
                                 LayoutInflater inflater = LayoutInflater.from(MainActivity.this);
                                 View subView = inflater.inflate(R.layout.dilog_item, null);
-                                final EditText subEditText = (EditText)subView.findViewById(R.id.editdilog);
+                                final EditText subEditText = (EditText) subView.findViewById(R.id.editdilog);
 
 
-
-
-
-                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this,R.style.AppCompatAlertDialogStyle);
+                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this, R.style.AppCompatAlertDialogStyle);
                                 builder.setTitle("Add Room");
 
                                 builder.setMessage("Press the Configuration Button on the CloverBoard ");
@@ -378,10 +460,6 @@ adapter.addFrag(new StarredFragment(new OnFragmentSelectedListener() {
                                 builder.setNegativeButton("CANCEL", null);
                                 builder.setView(subView);
                                 builder.show();
-
-
-
-
 
 
                             case R.id.item_navigation_drawer_help_and_feedback:
@@ -442,7 +520,6 @@ adapter.addFrag(new StarredFragment(new OnFragmentSelectedListener() {
 //
 //        }
     }
-
 
 
 }

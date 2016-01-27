@@ -23,4 +23,5 @@
     <dimen name="app_bar_height">256dp</dimen>
 
     <dimen name="expanded_toolbar_title_margin_start">64dp</dimen>
+    <dimen name="ac_temp_value">135dp</dimen>
 </resources>
