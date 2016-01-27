@@ -89,7 +89,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
-        android:background="@drawable/editapp"
+
+        android:src="@drawable/editapp"
         app:layout_anchor="@+id/edit_appliance_appbar"
         app:layout_anchorGravity="bottom|right|end" />
 

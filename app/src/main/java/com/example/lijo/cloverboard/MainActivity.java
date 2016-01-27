@@ -53,6 +53,9 @@ public class MainActivity extends AppCompatActivity  {
     EditText Dialougeedit;
     private ViewPagerAdapter adapter;
     private MenuItem menuItem;
+    private String temp="27";
+    private String text = temp;
+    private int t=27;
     private  NavigationView navigationView;
     final      Firebase ref = new Firebase("https://cloverboard.firebaseio.com");
     @Override
@@ -62,7 +65,7 @@ public class MainActivity extends AppCompatActivity  {
         Firebase.setAndroidContext(this);
 
         imageView=(ImageView) findViewById(R.id.header);
-        imageView.setImageResource(R.drawable.kitchen);
+        imageView.setImageResource(R.drawable.bed);
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(
                 R.id.collapse_toolbar);
 
@@ -136,14 +139,14 @@ navigationView.setCheckedItem(position);
                         switch (position) {
 
                             case 0:
-                                imageView.setImageResource(R.drawable.kitchen);
+                                imageView.setImageResource(R.drawable.bed);
                                 break;
                             case 1:
-                                imageView.setImageResource(R.drawable.beds);
+                                imageView.setImageResource(R.drawable.kitchen);
                                 break;
 
                             case 2:
-                                imageView.setImageResource(R.drawable.bed1);
+                                imageView.setImageResource(R.drawable.living);
                                 break;
 
                             case 3:

@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
@@ -18,8 +19,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 
 public class edit_appliances extends AppCompatActivity {
-    private String[] state1 = { "Dimmable", "Type 1", "Type 2"};
-    private Spinner spin1;
+
+
     @Bind(R.id.edit_appliance_toolbar)
     Toolbar toolbar;
 
@@ -55,6 +56,14 @@ public class edit_appliances extends AppCompatActivity {
                 android.R.layout.simple_spinner_item, state1);
         adapter_state1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spin1.setAdapter(adapter_state1);*/
+        initializeSpinner();
+    }
+
+    private void initializeSpinner() {
+
+
+
+
     }
 
     private void loadData() {
