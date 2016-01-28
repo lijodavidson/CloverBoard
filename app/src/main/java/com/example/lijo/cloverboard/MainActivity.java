@@ -63,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
     private boolean isLongPressed = false;
     Button blue_button;
   private   Button button;
-    final Firebase ref = new Firebase("https://cloverboard.firebaseio.com");
+   /* final Firebase ref = new Firebase("https://cloverboard.firebaseio.com");*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Firebase.setAndroidContext(this);
+        /*Firebase.setAndroidContext(this);*/
 
         imageView = (ImageView) findViewById(R.id.header);
         imageView.setImageResource(R.drawable.bed);
@@ -210,7 +210,7 @@ button=(Button)findViewById(R.id.main_button20);
       /*  setFragment(0);*/
 
 
-        ref.addAuthStateListener(new Firebase.AuthStateListener() {
+       /* ref.addAuthStateListener(new Firebase.AuthStateListener() {
             @Override
             public void onAuthStateChanged(AuthData authData) {
                 if (authData != null) {
@@ -219,7 +219,7 @@ button=(Button)findViewById(R.id.main_button20);
                     // user is not logged in
                 }
             }
-        });
+        });*/
 
 
     }
@@ -426,7 +426,7 @@ button=(Button)findViewById(R.id.main_button20);
 
                             case R.id.item_navigation_drawer_logout:
                                 menuItem.setChecked(true);
-                                ref.unauth();
+                              /*  ref.unauth();*/
                                 Controller.clearCache(getApplicationContext());
                                 Intent z = new Intent(getApplicationContext(), login.class);
                                 startActivity(z);
