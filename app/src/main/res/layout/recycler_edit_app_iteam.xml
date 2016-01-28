@@ -20,6 +20,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
         android:id="@+id/edit_appliance_items">
 
 
@@ -59,6 +60,8 @@
             style="@style/Base.TextAppearance.AppCompat.Widget.TextView.SpinnerItem"
             android:layout_below="@+id/view"
             android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+
             android:layout_marginTop="35dp" />
         <Spinner
             android:id="@+id/spinner1"
@@ -66,6 +69,8 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/text2"
             android:layout_toEndOf="@+id/text2"
+            android:layout_toRightOf="@+id/text2"
+            android:layout_marginLeft="59dp"
             android:layout_marginStart="59dp"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true"/>
@@ -86,6 +91,7 @@
 
             android:layout_marginTop="34dp"
             android:layout_below="@+id/spinner1"
+            android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
         <Spinner
             android:id="@+id/spinner2"
@@ -95,6 +101,8 @@
             android:layout_alignParentEnd="true"
             android:layout_alignTop="@+id/text3"
             android:layout_toEndOf="@+id/text3"
+            android:layout_toRightOf="@+id/text3"
+            android:layout_alignLeft="@+id/spinner1"
             android:layout_alignStart="@+id/spinner1" />
 
         <TextView
@@ -109,6 +117,7 @@
 
             android:layout_marginTop="34dp"
             android:layout_alignStart="@+id/text3"
+            android:layout_alignLeft="@+id/text3"
             android:layout_below="@+id/spinner2" />
 
         <TextView
@@ -123,6 +132,8 @@
             android:layout_marginTop="34dp"
             android:layout_below="@+id/spinner2"
             android:layout_alignStart="@+id/spinner2"
+            android:layout_alignLeft="@+id/spinner2"
+            android:layout_marginLeft="34dp"
             android:layout_marginStart="34dp" />
 
 
@@ -138,13 +149,14 @@
             android:paddingRight="8dp"
             android:paddingBottom="8dp"
             android:layout_marginRight="8dp"
-            android:paddingStart="8dp"
+
             android:clickable="true"
             android:textColor="@color/md_red_500"
 
             android:layout_marginLeft="0dp"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentEnd="true" />
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true" />
 
         <Button
             style="?android:attr/borderlessButtonStyle"
@@ -158,9 +170,11 @@
             android:paddingRight="8dp"
             android:paddingBottom="8dp"
             android:paddingEnd="8dp"
-            android:paddingStart="8dp"
+
+
             android:clickable="true"
             android:layout_alignTop="@+id/button2"
+            android:layout_toRightOf="@+id/text3"
             android:layout_toEndOf="@+id/text3" />
 
 

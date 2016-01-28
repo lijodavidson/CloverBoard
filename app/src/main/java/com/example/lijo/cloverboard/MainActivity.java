@@ -435,6 +435,9 @@ button=(Button)findViewById(R.id.main_button20);
 
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
+
+
+
                         /*    case R.id.item_navigation_drawer_settings:
                                 menuItem.setChecked(true);
 
@@ -462,11 +465,23 @@ button=(Button)findViewById(R.id.main_button20);
                                 builder.show();
 
 
-                            case R.id.item_navigation_drawer_help_and_feedback:
+                            case R.id.item_navigation_drawer_settings:
                                 menuItem.setChecked(true);
                                 Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
+
+
+                            case R.id.item_navigation_drawer_theme:
+                                menuItem.setChecked(true);
+                                Intent the = new Intent(getApplicationContext(), Theme.class);
+                                startActivity(the);
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                return true;
+
+
+
+
                         }
                         return true;
                     }

@@ -36,6 +36,9 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:drawableStart="@drawable/user"
+                android:drawableLeft="@drawable/user"
+
+
                 android:hint="@string/login_email"
                  />
 
@@ -58,6 +61,8 @@
                 android:inputType="textPassword"
                 style="@style/Base.AppTheme"
                 android:drawableStart="@drawable/lock5"
+                android:drawableLeft="@drawable/lock5"
+
                 android:hint="@string/login_password"/>
         </android.support.design.widget.TextInputLayout>
 

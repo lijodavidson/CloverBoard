@@ -63,6 +63,7 @@
                          android:layout_height="wrap_content"
                          android:layout_alignParentTop="true"
                          android:id="@+id/acbuttonlin"
+                         android:layout_alignParentLeft="true"
                          android:layout_alignParentStart="true">
 
                          <Button
@@ -76,6 +77,7 @@
 
                              android:background="@drawable/blue_button"
                              android:layout_centerVertical="true"
+                             android:layout_alignParentRight="true"
                              android:layout_alignParentEnd="true" />
 
                          <LinearLayout

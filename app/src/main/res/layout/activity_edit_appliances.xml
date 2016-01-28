@@ -60,6 +60,7 @@
                     android:layout_gravity="bottom"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
                     android:layout_marginBottom="28dp"
                     android:textStyle="normal"
                     android:transitionName="@string/abc_searchview_description_clear" />

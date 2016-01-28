@@ -1,7 +1,9 @@
 package com.example.lijo.cloverboard;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -119,10 +121,11 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
 
 
         holder.more.setOnClickListener(new View.OnClickListener() {
+            @TargetApi(Build.VERSION_CODES.KITKAT)
             @Override
             public void onClick(final View view) {
 
-                PopupMenu popup = new PopupMenu(view.getContext(), view, Gravity.TOP );
+                PopupMenu popup = new PopupMenu(view.getContext(), view);
                 popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
 
                 popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {

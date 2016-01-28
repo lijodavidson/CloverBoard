@@ -33,6 +33,8 @@
             android:layout_height="wrap_content"
             android:inputType="textCapWords"
             android:drawableStart="@drawable/user"
+            android:drawableLeft="@drawable/user"
+
             android:hint="Name" />
     </android.support.design.widget.TextInputLayout>
 
@@ -44,10 +46,13 @@
         android:paddingRight="22dp"
         android:layout_marginTop="4dp"
         android:drawableStart="@drawable/user"
+        android:drawableLeft="@drawable/user"
+
         android:layout_marginBottom="4dp">
         <EditText android:id="@+id/input_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/user"
             android:drawableStart="@drawable/user"
             android:inputType="textEmailAddress"
             android:hint="Email" />
@@ -64,6 +69,7 @@
         <EditText android:id="@+id/input_password"
             android:layout_width="match_parent"
             android:drawableStart="@drawable/lock5"
+            android:drawableLeft="@drawable/lock5"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:hint="Password"/>

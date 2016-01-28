@@ -28,14 +28,14 @@
     <item android:title="Customize">
         <menu>
             <item
-                android:id="@+id/item_navigation_drawer_settings"
+                android:id="@+id/item_navigation_drawer_theme"
                 android:icon="@drawable/theme_nav_icon"
                 android:title="Theme" />
 
 
 
             <item
-                android:id="@+id/item_navigation_drawer_help_and_feedback"
+                android:id="@+id/item_navigation_drawer_settings"
                 android:icon="@drawable/settings_nav_icon"
                 android:title="Settings" />
 

@@ -16,4 +16,5 @@
     <string name="schedule_appliance">Schedule</string>
     <string name="edit_appliance_nam">Name</string>
     <string name="title_activity_edit_appliances">edit_appliances</string>
+    <string name="title_activity_theme">Theme</string>
 </resources>

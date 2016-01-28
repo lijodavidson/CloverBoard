@@ -13,6 +13,11 @@ public class Radio {
     /*String radioDial;*/
 
 
+    /**
+     *
+     * @param radioName
+     * @param radioArt
+     */
     public Radio(String radioName ,int radioArt) {
         this.radioName = radioName;
         this.radioArt = radioArt;
