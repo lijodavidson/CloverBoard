@@ -72,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
         Firebase.setAndroidContext(this);
 
         imageView = (ImageView) findViewById(R.id.header);
-        imageView.setImageResource(R.drawable.bed);
+        imageView.setImageResource(R.drawable.bedroom_header);
         collapsingToolbar = (CollapsingToolbarLayout) findViewById(
                 R.id.collapse_toolbar);
 
@@ -95,18 +95,45 @@ button=(Button)findViewById(R.id.main_button20);
 
         viewPager = (ViewPager) findViewById(R.id.viewpager);
         setupViewPager(viewPager);
+        imageView.setOnTouchListener(new OnSwipeTouchListener(getApplicationContext()){
+
+            @Override
+            public void onSwipeRight() {
+
+                super.onSwipeRight();
+
+                Log.d("Swipe", "Right");
+                int currentItem = viewPager.getCurrentItem();
+                if(currentItem > 0){
+
+
+                    viewPager.setCurrentItem(currentItem - 1);
+                }
+            }
+
+            @Override
+            public void onSwipeLeft() {
+                super.onSwipeLeft();
+                Log.d("Swipe", "Left");
+                int currentItem = viewPager.getCurrentItem();
+                if(currentItem < (viewPager.getChildCount()-1)){
+
+                    viewPager.setCurrentItem(currentItem + 1);
+                }
+            }
+        });
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 //                Log.d("Position : ", String.valueOf(position));
-                current_time=System.currentTimeMillis();
+//                current_time=System.currentTimeMillis();
             }
 
             @Override
             public void onPageSelected(final int position) {
                 Log.d("Position1 : ", String.valueOf(position));
 
-                Toast.makeText(getApplicationContext(), String.valueOf(System.currentTimeMillis()-current_time), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), String.valueOf(System.currentTimeMillis()-current_time), Toast.LENGTH_SHORT).show();
 
                 switch (position) {
 
@@ -159,11 +186,11 @@ button=(Button)findViewById(R.id.main_button20);
                                 break;
 
                             case 3:
-                                imageView.setImageResource(R.drawable.bed2);
+                                imageView.setImageResource(R.drawable.bedroom_header);
                                 break;
 
                             case 4:
-                                imageView.setImageResource(R.drawable.top);
+                                imageView.setImageResource(R.drawable.bedroom_header);
                                 break;
                         }
 
@@ -230,15 +257,16 @@ button=(Button)findViewById(R.id.main_button20);
             boolean isOddClicked = true;
             public void onClick(View v) {
 
+                if (v.getId() == R.id.main_button20) {
+                    if (!isLongPressed) {
+                        if (isOddClicked) {
+                            button.setBackgroundResource(R.drawable.on);
+                            isOddClicked = false;
 
-                if (!isLongPressed) {
-                    if (isOddClicked) {
-                        button.setBackgroundResource(R.drawable.on);
-                        isOddClicked = false;
-
-                    } else {
-                        button.setBackgroundResource(R.drawable.off);
-                        isOddClicked = true;
+                        } else {
+                            button.setBackgroundResource(R.drawable.off);
+                            isOddClicked = true;
+                        }
                     }
                 }
             }

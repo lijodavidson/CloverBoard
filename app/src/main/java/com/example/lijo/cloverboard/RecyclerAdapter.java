@@ -137,12 +137,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHo
                                 Intent i = new Intent(view.getRootView().getContext(), edit_appliances.class);
                                 view.getRootView().getContext().startActivity(i);
                                 return true;
-
-
                             case R.id.schedule_appliance:
 
                                 return true;
-
 
                         }
                         return false;
