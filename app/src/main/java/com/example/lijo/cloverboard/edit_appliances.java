@@ -43,6 +43,7 @@ public class edit_appliances extends AppCompatActivity {
        // getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         collapsingToolbarLayout.setTitleEnabled(false);
         getSupportActionBar().setTitle("Edit Appliances");
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initializeViewsAdapter();

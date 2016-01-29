@@ -25,7 +25,7 @@
     </group>
 
 
-    <item android:title="Customize">
+    <item android:title="">
         <menu>
             <item
                 android:id="@+id/item_navigation_drawer_theme"
